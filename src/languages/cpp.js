@@ -17,7 +17,13 @@ function(hljs) {
       {
         begin: '(u8?|U|L)?"', end: '"',
         illegal: '\\n',
-        contains: [hljs.BACKSLASH_ESCAPE]
+        contains: [
+          hljs.BACKSLASH_ESCAPE,
+          {
+            className: 'format-string',
+            begin: /%[#$]*[0-9]*[$]*/, end: /[diouxXeEfFgGaAcsCSPnm%]/
+          }
+        ]
       },
       { begin: /(?:u8?|U|L)?R"([^()\\ ]{0,16})\((?:.|\n)*?\)\1"/ },
       {
@@ -39,7 +45,7 @@ function(hljs) {
 
   var PREPROCESSOR =       {
     className: 'meta',
-    begin: /#\s*[a-z]+\b/, end: /$/,
+    begin: /#\s*[a-z]+\b/, end: / /,
     keywords: {
       'meta-keyword':
         'if else elif endif define undef warning error line ' +
@@ -52,7 +58,7 @@ function(hljs) {
       hljs.inherit(STRINGS, {className: 'meta-string'}),
       {
         className: 'meta-string',
-        begin: /<[^\n>]*>/, end: /$/,
+        begin: /<[^\n>]*>/, end: / /,
         illegal: '\\n',
       },
       hljs.C_LINE_COMMENT_MODE,
@@ -60,19 +66,27 @@ function(hljs) {
     ]
   };
 
+  var HEADER = {
+    className: 'header',
+    begin: /<[^\n>]/, end: />/,
+    illegal: '\\n'
+  };
+
   var FUNCTION_TITLE = hljs.IDENT_RE + '\\s*\\(';
 
   var CPP_KEYWORDS = {
-    keyword: 'int float while private char catch import module export virtual operator sizeof ' +
-      'dynamic_cast|10 typedef const_cast|10 const for static_cast|10 union namespace ' +
-      'unsigned long volatile static protected bool template mutable if public friend ' +
-      'do goto auto void enum else break extern using asm case typeid ' +
-      'short reinterpret_cast|10 default double register explicit signed typename try this ' +
+    custom_keywords: '__func__',
+    types: 'int float char union unsigned long bool void enum short double signed',
+    keyword: 'while private catch import module export virtual operator sizeof ' +
+      'dynamic_cast|10 typedef const_cast|10 const for static_cast|10 namespace ' +
+      'volatile static protected template mutable if public friend ' +
+      'do goto auto else break extern using asm case typeid ' +
+      'reinterpret_cast|10 default register explicit typename try this ' +
       'switch continue inline delete alignof constexpr decltype ' +
       'noexcept static_assert thread_local restrict _Bool complex _Complex _Imaginary ' +
       'atomic_bool atomic_char atomic_schar ' +
       'atomic_uchar atomic_short atomic_ushort atomic_int atomic_uint atomic_long atomic_ulong atomic_llong ' +
-      'atomic_ullong new throw return ' +
+      'atomic_ullong new throw return __attribute__ ' +
       'and or not',
     built_in: 'std string cin cout cerr clog stdin stdout stderr stringstream istringstream ostringstream ' +
       'auto_ptr deque list queue stack vector map set bitset multiset multimap unordered_set ' +
@@ -91,6 +105,7 @@ function(hljs) {
     hljs.C_LINE_COMMENT_MODE,
     hljs.C_BLOCK_COMMENT_MODE,
     NUMBERS,
+    HEADER,
     STRINGS
   ];
 
