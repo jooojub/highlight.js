@@ -76,7 +76,7 @@ function(hljs) {
 
   var CPP_KEYWORDS = {
     custom_keywords: '__func__',
-    types: 'int float char union unsigned long bool void enum short double signed',
+    types: 'int float char union unsigned long bool void enum short double signed FILE',
     keyword: 'while private catch import module export virtual operator sizeof ' +
       'dynamic_cast|10 typedef const_cast|10 const for static_cast|10 namespace ' +
       'volatile static protected template mutable if public friend ' +
@@ -91,7 +91,7 @@ function(hljs) {
     built_in: 'std string cin cout cerr clog stdin stdout stderr stringstream istringstream ostringstream ' +
       'auto_ptr deque list queue stack vector map set bitset multiset multimap unordered_set ' +
       'unordered_map unordered_multiset unordered_multimap array shared_ptr abort abs acos ' +
-      'asin atan2 atan calloc ceil cosh cos exit exp fabs floor fmod fprintf fputs free frexp ' +
+      'asin atan2 atan calloc ceil cosh cos exit exp fabs floor fmod fprintf fputs free frexp fopen fclose ' +
       'fscanf isalnum isalpha iscntrl isdigit isgraph islower isprint ispunct isspace isupper ' +
       'isxdigit tolower toupper labs ldexp log10 log malloc realloc memchr memcmp memcpy memset modf pow ' +
       'printf putchar puts scanf sinh sin snprintf sprintf sqrt sscanf strcat strchr strcmp ' +
