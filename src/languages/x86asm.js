@@ -84,6 +84,7 @@ function(hljs) {
           relevance: 0
         }
       ),
+      hljs.C_BLOCK_COMMENT_MODE,
       {
         className: 'address',
         begin: /[0-9a-fA-F]+:/
