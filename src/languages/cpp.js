@@ -68,7 +68,7 @@ function(hljs) {
 
   var HEADER = {
     className: 'header',
-    begin: /<[^\n>]/, end: />/,
+    begin: /<[^\n>]+>/,
     illegal: '\\n'
   };
 
