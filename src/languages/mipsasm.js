@@ -36,7 +36,7 @@ function(hljs) {
             'addi?u?|andi?|b(al)?|beql?|bgez(al)?l?|bgtzl?|blezl?|bltz(al)?l?|' +
             'bnel?|cl[oz]|divu?|ext|ins|j(al)?|jalr(\.hb)?|jr(\.hb)?|lbu?|lhu?|' +
             'll|lui|lw[lr]?|maddu?|mfhi|mflo|movn|movz|move|msubu?|mthi|mtlo|mul|' +
-            'multu?|nop|nor|ori?|rotrv?|sb|sc|se[bh]|sh|sllv?|slti?u?|srav?|' +
+            'multu?|nop|nor|ori?|rotrv?|sb|li|sc|se[bh]|sh|sllv?|slti?u?|srav?|' +
             'srlv?|subu?|sw[lr]?|xori?|wsbh|' +
             // floating-point instructions
             'abs\.[sd]|add\.[sd]|alnv.ps|bc1[ft]l?|' +
@@ -70,9 +70,14 @@ function(hljs) {
         relevance: 0
       },
       {
+        className: 'address',
+        begin: /[0-9a-fA-F]+:/
+      },
+      {
         className: 'number',
         variants: [
             {begin: '0x[0-9a-f]+'}, //hex
+            {begin: '[0-9a-f]{3,8}'}, //hex
             {begin: '\\b-?\\d+'}           //bare number
         ],
         relevance: 0
